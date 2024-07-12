@@ -190,6 +190,7 @@ inoremap {}     {}
 
 " fzf bindings
 nnoremap <silent> <C-f> :Files<CR>
+nmap <C-P> :FZF<CR>
 let g:fzf_layout = { 'down': '10' }
 
 " plugins
@@ -203,13 +204,10 @@ call plug#end()
 " Enable airline powerline fonts
 let g:airline_powerline_fonts = 1
 
-" plugins
-call plug#begin('~/.vim/plugged')
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-call plug#end()
-
-" Enable airline powerline fonts
-let g:airline_powerline_fonts = 1
+# Enable the theme as onedark 
+# Ref : https://medium.com/@jeantimex/how-to-configure-iterm2-and-vim-like-a-pro-on-macos-e303d25d5b5c
+colorscheme onedark
+syntax on
+set number
+highlight Normal ctermbg=None
+highlight LineNr ctermfg=DarkGrey
