@@ -1,0 +1,120 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Left side prompt - Added $os at the very beginning
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$character"""
+
+# Right side prompt
+right_format = """
+$nodejs\
+$python\
+$java\
+$time"""
+
+# --- OS Icon Configuration ---
+[os]
+disabled = false
+style = "bold blue"
+format = "[$symbol]($style) "
+
+# Basic fallback symbols (Starship will auto-detect your OS and use the right icon)
+[os.symbols]
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+CentOS = ""
+Debian = ""
+Fedora = "󰣛"
+FreeBSD = ""
+Garuda = "󰣕"
+Gentoo = ""
+HardenedBSD = "󰞌"
+Illumos = "󰈸"
+Linux = ""
+Mabox = ""
+Macos = ""
+Manjaro = ""
+MidnightBSD = ""
+Mint = ""
+NetBSD = ""
+NixOS = ""
+OpenBSD = "󰈺"
+OpenCloudOS = "☁️"
+Pop = ""
+Raspbian = ""
+Redhat = ""
+RedHatEnterprise = ""
+RockyLinux = ""
+Redox = "󰚗"
+Solus = ""
+SUSE = ""
+Ubuntu = ""
+Unknown = ""
+Void = ""
+Windows = "󰖳"
+
+[directory]
+style = "blue"
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](green)"
+
+# --- Updated Git Configurations with Nerd Font Icons ---
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+style = "bright-black"
+symbol = " " # Nerd Font Git Branch Icon
+
+[git_status]
+format = "[[($all_status$ahead_behind)]($style) ]($style)"
+style = "cyan"
+conflicted = "󰳦 "  # 󰳦
+untracked = "? "   # 
+modified = " "    # 
+staged = " "      # 
+renamed = " "     # 
+deleted = " "     # 
+stashed = " "     # 
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[cmd_duration]
+format = "[$duration]($style) "
+style = "yellow"
+
+# --- Right Side Modules Configuration ---
+
+[time]
+disabled = false
+format = "[ $time]($style) "
+style = "bright-black"
+time_format = "%R"
+
+[python]
+format = "[$symbol$virtualenv]($style) "
+style = "bold bright-black"
+symbol = " "             # Nerd Font Python Icon
+
+[nodejs]
+format = "[$symbol$version]($style) "
+style = "bold green"
+symbol = " "             # Nerd Font Node.js Icon
+
+[java]
+format = "[$symbol$version]($style) "
+style = "bold red"
+symbol = " "             # Nerd Font Java Icon

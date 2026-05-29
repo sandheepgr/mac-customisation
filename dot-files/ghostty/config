@@ -1,0 +1,11 @@
+theme=Catppuccin Mocha
+background-blur=false
+font-family="FiraCode Nerd Font Propo"
+font-size=15
+background-opacity=.8
+background-blur=true
+window-padding-x = 30
+window-padding-y = 10
+
+
+
