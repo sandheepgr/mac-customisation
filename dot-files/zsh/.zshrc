@@ -32,7 +32,7 @@ export PATH=/opt/homebrew/Cellar/python@3.9/3.9.9/bin:$PATH
 export PATH=/opt/homebrew/opt/rabbitmq/sbin:$PATH
 export PATH=/Users/sandheepgr/Development/programs/postgres/14/bin:$PATH
 export PATH="/Users/sandheepgr/.local/bin:$PATH"
-
+export PATH=/Users/sandheepgr/.opencode/bin:$PATH
 # Specific Ecosystem Roots
 export VAULT_PATH=/Volumes/vault
 
