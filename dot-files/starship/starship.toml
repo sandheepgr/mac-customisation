@@ -1,120 +1,218 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Left side prompt - Added $os at the very beginning
-format = """
+# Required to avoid the empty line when using a new terminal session 
+add_newline=false
+palette = 'catppuccin_frappe'
+
+# Left side prompt: OS -> Directory -> Git
+format = """[](mauve)\
 $os\
-$username\
-$hostname\
+[](bg:lavender fg:mauve)\
 $directory\
+[](bg:blue fg:lavender)\
 $git_branch\
-$git_state\
 $git_status\
-$cmd_duration\
+[ ](fg:blue)\
+$line_break\
 $character"""
 
-# Right side prompt
+# Right side prompt: Cleanly bound inside an unbreakable background container
 right_format = """
+[](fg:surface0)\
+$c\
+$rust\
+$golang\
 $nodejs\
-$python\
+$bun\
+$php\
 $java\
-$time"""
+$kotlin\
+$haskell\
+$python\
+$conda\
+$docker_context\
+$cmd_duration\
+$time\
+[](fg:surface0)"""
 
-# --- OS Icon Configuration ---
 [os]
 disabled = false
-style = "bold blue"
-format = "[$symbol]($style) "
+style = "bg:mauve fg:crust"
+format = "[$symbol ]($style)"
 
-# Basic fallback symbols (Starship will auto-detect your OS and use the right icon)
 [os.symbols]
+Windows = ""
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
 Alpine = ""
 Amazon = ""
-Android = ""
+Android = ""
+AOSC = ""
 Arch = "󰣇"
+Artix = "󰣇"
 CentOS = ""
-Debian = ""
-Fedora = "󰣛"
-FreeBSD = ""
-Garuda = "󰣕"
-Gentoo = ""
-HardenedBSD = "󰞌"
-Illumos = "󰈸"
-Linux = ""
-Mabox = ""
-Macos = ""
-Manjaro = ""
-MidnightBSD = ""
-Mint = ""
-NetBSD = ""
-NixOS = ""
-OpenBSD = "󰈺"
-OpenCloudOS = "☁️"
-Pop = ""
-Raspbian = ""
-Redhat = ""
-RedHatEnterprise = ""
-RockyLinux = ""
-Redox = "󰚗"
-Solus = ""
-SUSE = ""
-Ubuntu = ""
-Unknown = ""
-Void = ""
-Windows = "󰖳"
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
 
 [directory]
-style = "blue"
+style = "bg:lavender fg:crust"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
 
-[character]
-success_symbol = "[❯](purple)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
-
-# --- Updated Git Configurations with Nerd Font Icons ---
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
 
 [git_branch]
-format = "[$symbol$branch]($style) "
-style = "bright-black"
-symbol = " " # Nerd Font Git Branch Icon
+symbol = ""
+style = "bg:blue"
+format = '[[ $symbol $branch ](fg:crust bg:blue)]($style)'
 
 [git_status]
-format = "[[($all_status$ahead_behind)]($style) ]($style)"
-style = "cyan"
-conflicted = "󰳦 "  # 󰳦
-untracked = "? "   # 
-modified = " "    # 
-staged = " "      # 
-renamed = " "     # 
-deleted = " "     # 
-stashed = " "     # 
+style = "bg:blue"
+format = '[[($all_status$ahead_behind )](fg:crust bg:blue)]($style)'
 
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
-style = "bright-black"
+# --- Language Runtimes (Cleaned layout text syntax) ---
+
+[nodejs]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[bun]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[c]
+symbol = " "
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[rust]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[golang]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[php]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[java]
+symbol = ""
+style = "bg:surface0 fg:peach"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[kotlin]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[haskell]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[python]
+symbol = ""
+style = "bg:surface0 fg:green"
+format = '[$symbol( $version)(\(#$virtualenv\)) ]($style)[| ](fg:bright-black bg:surface0)'
+
+# --- Environments & Metrics ---
+
+[docker_context]
+symbol = ""
+style = "bg:surface0 fg:mauve"
+format = '[$symbol( $context) ]($style)[| ](fg:bright-black bg:surface0)'
+
+[conda]
+symbol = " "
+style = "bg:surface0 fg:mauve"
+format = '[$symbol$environment ]($style)[| ](fg:bright-black bg:surface0)'
+ignore_base = false
 
 [cmd_duration]
-format = "[$duration]($style) "
-style = "yellow"
-
-# --- Right Side Modules Configuration ---
+show_milliseconds = true
+disabled = false
+min_time_to_notify = 45000
+show_notifications = true
+style = "bg:surface0 fg:yellow"
+format = '[ $duration ]($style)[| ](fg:bright-black bg:surface0)'
 
 [time]
 disabled = false
-format = "[ $time]($style) "
-style = "bright-black"
 time_format = "%R"
+style = "bg:surface0 fg:text"
+format = '[󰥔 $time]($style)' # Swapped to a sleeker time icon variant
 
-[python]
-format = "[$symbol$virtualenv]($style) "
-style = "bold bright-black"
-symbol = " "             # Nerd Font Python Icon
+# --- Utilities & Prompt Settings ---
 
-[nodejs]
-format = "[$symbol$version]($style) "
-style = "bold green"
-symbol = " "             # Nerd Font Node.js Icon
+[line_break]
+disabled = true
 
-[java]
-format = "[$symbol$version]($style) "
-style = "bold red"
-symbol = " "             # Nerd Font Java Icon
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:blue)'
+error_symbol = '[❯](bold fg:mauve)'
+vimcmd_symbol = '[❮](bold fg:peach)'
+vimcmd_replace_one_symbol = '[❮](bold fg:peach)'
+vimcmd_replace_symbol = '[❮](bold fg:peach)'
+vimcmd_visual_symbol = '[❮](bold fg:yellow)'
+
+# --- Catppuccin Complete Palette Overrides ---
+[palettes.catppuccin_mocha]
+mauve = "#cba6f7"
+red = "#f38ba8"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+surface0 = "#313244"
+crust = "#11111b"
+
+[palettes.catppuccin_frappe]
+mauve = "#ca9ee6"
+red = "#e78284"
+peach = "#ef9f76"
+yellow = "#e5c890"
+green = "#a6d189"
+sapphire = "#85c1dc"
+blue = "#8caaee"
+lavender = "#babbf1"
+text = "#c6d0f5"
+surface0 = "#414559"
+crust = "#232634"
+
+[palettes.catppuccin_macchiato]
+mauve = "#c6a0f6"
+red = "#ed8796"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+surface0 = "#363a4f"
+crust = "#181926"

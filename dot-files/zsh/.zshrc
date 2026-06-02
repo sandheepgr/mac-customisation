@@ -198,4 +198,18 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # 4. Starship Prompt - MUST be initialized absolute last among prompt/hook tools
 export STARSHIP_CONFIG=~/.config/starship.toml
+
+# Force Vim Mode first
+bindkey -v
+
+# Safely prevent Starship from creating an infinite keymap loop
+# Without this, we will get the following error when trying do vim mode in prompt
+# starship_zle-keymap-select-wrapped:1: maximum nested function level reached; increase FUNCNEST?
+if [[ "${widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select" || \
+      "${widgets[zle-keymap-select]#user:}" == "starship_zle-keymap-select-wrapped" ]]; then
+    zle -N zle-keymap-select ""
+fi
+
+# Initialize Starship safely
 eval "$(starship init zsh)"
+
